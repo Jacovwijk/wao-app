@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+	<head>
+		<meta charset="UTF-8">
+		<title>Applicatie</title>
+		<!-- Angular & JQuery -->
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="js/script.js"></script>
+		<!-- stylesheet -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" >
+		<link rel="stylesheet" href="css/style.css" type="text/css" >
+	</head>
+
+	<body>
+		<div ng-controller="myController">
+		Search : <input type="text" placeholder="Search by title" ng-model="searchText.title" /></br></br>
+		
+		<div class="category">
+		Select category: </br>
+			<div ng-repeat="cat in getCategories()">
+	        <input type="checkbox" ng-model="filter[cat]" /> {{cat}}
+	    	</div></br>
+	    </div>
+
+		<div class="filetype">
+		Select filetype:
+				<input type="radio" ng-model="catSort" name="all" value=""> All
+				<input type="radio" ng-model="catSort" name="codesnippet" value="codesnippet"> Codesnippets
+				<input type="radio" ng-model="catSort" name="article" value="article"> Articles
+				<input type="radio" ng-model="catSort" name="video" value="video"> Videos
+				<input type="radio" ng-model="catSort" name="link" value="link"> Link
+		</div>
+		</br>
+
+
+		<div ng-show="filtered.length">
+		Gevonden resultaten: {{filtered.length}}
+			<table>
+				<thead>
+					<tr>
+						<th ng-click="sortData('title')">
+							Title <div ng-class="getSortClass('title')"></div>
+						</th>
+						<th ng-click="sortData('uploaded')">
+							Uploaded <div ng-class="getSortClass('uploaded')"></div>
+						</th>
+						<th >
+							Genre
+						</th>
+						<th >
+							filetype 
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="f in filtered = ( files | orderBy: sortColumn:reverseSort | filter: filterByCategory | filter: filterFile | filter: searchText | limitTo: 20 )">
+						<td>{{ f.title }}</td>
+						<td>{{ f.uploaded | date:"dd/MM/yyyy" }}</td>
+						<td>{{ f.category }}</td>
+						<td>{{ f.filetype }}</td>
+						<td><button ng-click="verwijderen(f.id)">Delete</button></td>
+						<td><button ng-click="aanpassen(f.id)">Edit</button></td>
+					</tr>
+				</tbody>
+			  </br>
+			</table>
+			</div>
+			<div ng-hide="filtered.length">
+			No data found, try again.
+			</br></br>
+			</div>
+			<div ng-show="onefile">
+			Wijzig data:
+		    <table class="table">
+			    <tr>
+			    	<th>Title</th><th>Genre</th><th>Filetype</th><th>
+			    </tr>
+			    <tr>
+			       <td><input type="text" ng-model="onefile.title" name="all" value="onefile.title"></td><td>{{onefile.category}}</td><td>{{onefile.filetype}}</td><td><button class="btn" ng-click="clear()">Clear</button><button class="btn" ng-click="edit(onefile.id)">Save</button></td>
+		    	  </tr>
+		    </table>
+		    </div>
+
+		    <div class="control-group">
+		      <label class="control-label" for="fn">Voeg nieuwe file toe</label>
+		      <div class="controls">
+		            <input class="input-xlarge" id="fn" type="text" ng-model="file.title"
+		                 placeholder="Titel" required="required"/>	 
+		            <input class="input-xlarge" id="fn" type="text" ng-model="file.category"
+		                 placeholder="Category" required="required"/>
+		            <input class="input-xlarge" id="fn" type="text" ng-model="file.filetype"
+		                 placeholder="Filetype" required="required"/>
+		      </div>
+		      <button type="submit" class="btn btn-primary" ng-click="opslaan()" ng-model-instant>
+		        <a class="icon-plus"></a> Save
+		      </button>
+		    </div>
+
+		
+		</div>
+	</body>
+</html>
