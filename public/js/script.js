@@ -1,9 +1,23 @@
 /// <reference path="angular.min.js" />
-var app = angular
+ angular.module("myApp", ['ngRoute'])
 
-		.module("myApp", [])
+ 		.config(['$routeProvider', '$locationProvider',
+			function($routeProvider, $locationProvider) {
+				$routeProvider.
+				when('/' , {
+					templateUrl : 'views/home.html',
+					controller : 'myController'
+				}).when('/file/:id', {
+					templateUrl : 'views/file.html',
+					controller : 'myController'
+				}).when('/404', {
+					templateUrl : 'views/404.html',
+					controller : 'myController'
+				});
+				//otherwise({ redirectTo : '/404'});
+		}])
 
-		.controller("myController",  function($scope, $http, $log){
+		.controller("myController",  function($scope, $http, $log, $routeParams){
 
 				$scope.opslaan = function ()  {
 				    $http.post('/files', angular.toJson($scope.file)).success(function () {
@@ -37,57 +51,59 @@ var app = angular
 					      });
 				 };
 
-				 $scope.edit = function (id)  {
+				 $scope.id = $routeParams.id;
+				 $scope.aanpassen($scope.id);
+
+				$scope.edit = function (id)  {
 				    $http.put("/file/" + id, angular.toJson($scope.onefile)).success(function () {
 				    	$scope.load();
 				    	$scope.onefile = "";
 				    });
 				 };
 
-				 $scope.verwijderen = function (id)  {
+				$scope.verwijderen = function (id)  {
 				    $http.delete("/file/" + id).success(function () {
 				    	$scope.load();
 				    });
 				 };
 
-				 $scope.clear = function ()  {
+				$scope.clear = function ()  {
 				    $scope.onefile = "";
 				 };
 
+				 $scope.aan = false;
+				 $scope.pasaan = function () {
+				 	$scope.aan = true;
+				 }
+				 $scope.cancel = function() {
+				 	$scope.aan = false;
+				 }
+
 				$scope.sortColumn = "title"; 
 				$scope.reverseSort = false; 
-				
 				$scope.catSort = "";
 
 				$scope.sortData = function (column) {
-
 					$scope.reverseSort = ($scope.sortColumn == column) ? !$scope.reverseSort : false;
 
 					$scope.sortColumn = column;
-
 				}
 
 				$scope.getSortClass = function (column) {
-
 					if ($scope.sortColumn == column) {
 
 						return $scope.reverseSort ? 'arrow-down' : 'arrow-up';
 
 					}
-
 					return '';
-
 				}
 
 				// filter op filetype
-				 $scope.filterFile = function (file) {
-
+				$scope.filterFile = function (file) {
 				 	if($scope.catSort == "") {
 				 		return '' == $scope.catSort ;
 				 	}
-				 	
 				 	return file.filetype == $scope.catSort;
-
 			    }
 
 			    // filter op category
@@ -104,7 +120,6 @@ var app = angular
 			    $scope.filterByCategory = function (file) {
 			        return $scope.filter[file.category] || noFilter($scope.filter);
 			    };
-			    
 			    function noFilter(filterObj) {
 			        for (var key in filterObj) {
 			            if (filterObj[key]) {
@@ -114,4 +129,5 @@ var app = angular
 			        return true;
 			    } 
 
-});
+		});
+		
