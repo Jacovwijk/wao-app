@@ -66,8 +66,8 @@ app.put('/file/:id', function (req, res) {
   var idf = req.params.id;
   var connection = getConnection();
   connection.connect();
-  var editFile = {id: idf, title: req.body.title};
-  var query = connection.query('UPDATE dataluik SET title = ? WHERE id = ?', [editFile.title, editFile.id] , function (err, result) {
+  var editFile = {id: idf, title: req.body.title, category: req.body.category};
+  var query = connection.query('UPDATE dataluik SET title = ?, category =? WHERE id = ?', [editFile.title, editFile.category, editFile.id] , function (err, result) {
     res.status(200).end();
   });
   connection.end();

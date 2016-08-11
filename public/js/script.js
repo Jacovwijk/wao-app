@@ -1,5 +1,15 @@
 /// <reference path="angular.min.js" />
- angular.module("myApp", ['ngRoute'])
+ angular.module("myApp", ['ngRoute','ui.bootstrap'])
+
+ 		.filter('startFrom', function() {
+		    return function(input, start) {
+		        if(input) {
+		            start = +start; //parse to int
+		            return input.slice(start);
+		        }
+		        return [];
+		    }
+		})
 
  		.config(['$routeProvider', '$locationProvider',
 			function($routeProvider, $locationProvider) {
@@ -17,7 +27,7 @@
 				//otherwise({ redirectTo : '/404'});
 		}])
 
-		.controller("myController",  function($scope, $http, $log, $routeParams){
+		.controller("myController",  function($scope, $http, $log, $location, $routeParams, $timeout){
 
 				$scope.opslaan = function ()  {
 				    $http.post('/files', angular.toJson($scope.file)).success(function () {
@@ -30,6 +40,10 @@
 				    $http.get('/files').
 				     	success(function(data, status, headers, config) {
 				        	$scope.files = data;
+				        	$scope.currentPage = 1; //current page
+					        $scope.entryLimit = 5; //max no of items to display in a page
+					        $scope.filteredItems = $scope.files.length; //Initially for no filter  
+					        $scope.totalItems = $scope.files.length;
 				      }).
 				     	error(function(data, status, headers, config) {
 				       		console.log(status);
@@ -56,14 +70,13 @@
 
 				$scope.edit = function (id)  {
 				    $http.put("/file/" + id, angular.toJson($scope.onefile)).success(function () {
-				    	$scope.load();
-				    	$scope.onefile = "";
+				    	$scope.aan = false;
 				    });
 				 };
 
 				$scope.verwijderen = function (id)  {
 				    $http.delete("/file/" + id).success(function () {
-				    	$scope.load();
+				    	$location.path('/');
 				    });
 				 };
 
@@ -117,6 +130,8 @@
 			        });
 			    };
 
+
+
 			    $scope.filterByCategory = function (file) {
 			        return $scope.filter[file.category] || noFilter($scope.filter);
 			    };
@@ -127,7 +142,17 @@
 			            }
 			        }
 			        return true;
-			    } 
+			    };
+
+			     $scope.selected = function() {
+			        $timeout(function() { 
+			            $scope.filteredItems = $scope.filtered.length;
+			        }, 10);
+			    };
+
+			    $scope.setPage = function(pageNo) {
+       			 	$scope.currentPage = pageNo;
+    			};
 
 		});
 		

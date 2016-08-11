@@ -3,7 +3,7 @@ This is one file
 </br>
 
 
-	Wijzig data:
+	
     <table class="table">
 	    <tr>
 	    	<th>Title</th><th>Genre</th><th>Filetype</th><th>
@@ -15,16 +15,31 @@ This is one file
     	</tr>
     </table>
 
-<div ng-show="aan">
-	<table class="table">
-	    <tr>
-	    	<th>Title</th><th>Genre</th><th>Filetype</th><th>
-	    </tr>
-	    <tr>
-	       <td><input type="text" ng-model="onefile.title" name="all" value="onefile.title"></td><td>{{onefile.category}}</td><td>{{onefile.filetype}}</td><td><button class="btn" ng-click="cancel()">Cancel</button><button class="btn" ng-click="edit(onefile.id)">Save</button></td>
-    	</tr>
-    </table>
+	<div ng-show="aan">
+	Wijzig data:
+		<table class="table">
+		    <tr>
+		    	<th>Title</th><th>Genre</th><th>Filetype</th><th>
+		    </tr>
+		    <tr>
+		       <td><input type="text" ng-model="onefile.title" name="all" value="onefile.title"></td>
+		       <td>
+		       <select ng-model="onefile.category">
+			       <option value="CSS">CSS</option>
+			       <option value="design">Design</option>
+				   <option value="html">HTML</option>
+				   <option value="javascript">Javascript</option>
+				   <option value="PHP">PHP</option>
+			   </select>
+			   </td>
+		       <td>{{onefile.filetype}}</td>
+		       <td>
+			       <button class="btn" ng-click="cancel()">Cancel</button>
+			       <button class="btn" ng-click="edit(onefile.id)">Save</button>
+		       </td>
+	    	</tr>
+	    </table>
 
-</div>
+	</div>
 </br>
 </br>
