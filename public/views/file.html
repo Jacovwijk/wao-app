@@ -4,20 +4,24 @@ This is one file
 
 
 	
-    <table class="table">
+    <table>
+    <thead>
 	    <tr>
-	    	<th>Title</th><th>Genre</th><th>Filetype</th><th>
+	    	<th>Title</th><th>Genre</th><th>Filetype</th>
 	    </tr>
+	</thead>
+	<tbody>
 	    <tr>
 	       <td>{{onefile.title}}</td><td>{{onefile.category}}</td><td>{{onefile.filetype}}</td>
 	       <td><button ng-click="verwijderen(onefile.id)">Delete</button></td>
 		   <td><button ng-click="pasaan()">Edit</button></td>
     	</tr>
+    </tbody>
     </table>
 
 	<div ng-show="aan">
 	Wijzig data:
-		<table class="table">
+		<table>
 		    <tr>
 		    	<th>Title</th><th>Genre</th><th>Filetype</th><th>
 		    </tr>

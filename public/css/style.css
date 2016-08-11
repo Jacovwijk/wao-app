@@ -1,5 +1,4 @@
 body {
-	margin: 20px;
 	font-family: Arial;
 }
 
@@ -36,3 +35,22 @@ th {
 	border-top: 10px solid black;
 	display: inline-block;
 }
+
+footer {
+	min-height: 50px;
+    margin-top: 20px;
+    border: 1px solid transparent;
+    background-color: #f8f8f8;
+    border-color: #e7e7e7;
+}
+
+.text-footer {
+	font-size: 18px;
+    line-height: 4;
+    text-align: center;
+}
+
+.no-data {
+	display: inline;
+}
+

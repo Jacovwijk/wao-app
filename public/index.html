@@ -7,7 +7,6 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 	<script src="js/ui-bootstrap-tpls-0.10.0.min.js"></script>
 	<script src="js/angular-route.js"></script>
-
 	<script src="js/script.js"></script>
 	<!-- stylesheet -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -30,11 +29,15 @@
 		</nav>
 	</header>
 
-	<div ng-view class="row">
+	<div class="row">
+		<div ng-view class="container">
+		</div>
 	</div>
 
 	<footer>
-		Footer information to be placed here
+		<div class="container text-footer">
+			Footer information to be placed here
+		</div>
 	</footer>
 
 	</body>

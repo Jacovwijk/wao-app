@@ -41,7 +41,7 @@
 				     	success(function(data, status, headers, config) {
 				        	$scope.files = data;
 				        	$scope.currentPage = 1; //current page
-					        $scope.entryLimit = 5; //max no of items to display in a page
+					        $scope.entryLimit = 6; //max no of items to display in a page
 					        $scope.filteredItems = $scope.files.length; //Initially for no filter  
 					        $scope.totalItems = $scope.files.length;
 				      }).
