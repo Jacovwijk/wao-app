@@ -1,23 +1,16 @@
-This is one file
-</br>
-</br>
+<div id="sidebar-wrapper" class="col-sm-3">
+	Nieuw binnen
+	<ul>
+		<li ng-repeat="f in files | orderBy:f.uploaded | limitTo: 5"><a ng-href="#/file/{{f.id}}">{{f.title}}</a></li>
+	</ul>
+</div>
 
-
-	
-    <table>
-    <thead>
-	    <tr>
-	    	<th>Title</th><th>Genre</th><th>Filetype</th>
-	    </tr>
-	</thead>
-	<tbody>
-	    <tr>
-	       <td>{{onefile.title}}</td><td>{{onefile.category}}</td><td>{{onefile.filetype}}</td>
-	       <td><button ng-click="verwijderen(onefile.id)">Delete</button></td>
-		   <td><button ng-click="pasaan()">Edit</button></td>
-    	</tr>
-    </tbody>
-    </table>
+<div id="page-content-wrapper"  class="col-sm-9">
+	<h2>{{onefile.title}}</h2></br>
+	<div><span >{{onefile.category}}</span>
+	<span >{{onefile.filetype}}</span></div></br>
+	<button class="btn btn-primary" ng-click="pasaan()">Edit</button>
+	 <button class="btn btn-danger" ng-click="verwijderen(onefile.id)">Delete</button>
 
 	<div ng-show="aan">
 	Wijzig data:
@@ -38,12 +31,18 @@ This is one file
 			   </td>
 		       <td>{{onefile.filetype}}</td>
 		       <td>
-			       <button class="btn" ng-click="cancel()">Cancel</button>
-			       <button class="btn" ng-click="edit(onefile.id)">Save</button>
+			       <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+			       <button class="btn btn-primary" ng-click="edit(onefile.id)">Save</button>
 		       </td>
 	    	</tr>
 	    </table>
 
 	</div>
-</br>
-</br>
+	</br>
+	</br>
+</div>
+
+
+
+	
+    

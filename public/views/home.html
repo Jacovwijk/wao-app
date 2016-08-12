@@ -1,45 +1,23 @@
 	<div id="sidebar-wrapper" class="col-sm-3">
 		Search : <input type="text" placeholder="Search by title" ng-model="searchText.title" ng-change="selected()" /></br></br>
 			
-		<div class="category">
-		Select your category: </br>
+		<div>
+		<span >Select your category: </span></br>
 			<div ng-repeat="cat in getCategories()">
 		    <input type="checkbox" ng-model="filter[cat]" ng-change="selected()" /> {{cat}}
 			</div></br>
 		</div>
 
-		<div class="filetype">
-		Select a filetype: </br>
-				<input type="radio" ng-model="catSort" name="all" value="" ng-change="selected()"> All </br>
-				<input type="radio" ng-model="catSort" name="codesnippet" value="codesnippet" ng-change="selected()"> Codesnippets </br>
-				<input type="radio" ng-model="catSort" name="article" value="article" ng-change="selected()"> Articles </br>
-				<input type="radio" ng-model="catSort" name="video" value="video" ng-change="selected()"> Videos </br>
-				<input type="radio" ng-model="catSort" name="link" value="link" ng-change="selected()"> Link </br>
+		<div>
+		<span >Select a filetype: </span></br>
+				<input type="radio" ng-model="catSort" name="All" value="" ng-change="selected()"> All </br>
+				<input type="radio" ng-model="catSort" name="Codesnippet" value="codesnippet" ng-change="selected()"> Codesnippets </br>
+				<input type="radio" ng-model="catSort" name="Article" value="Article" ng-change="selected()"> Articles </br>
+				<input type="radio" ng-model="catSort" name="Cideo" value="Video" ng-change="selected()"> Videos </br>
+				<input type="radio" ng-model="catSort" name="Link" value="Link" ng-change="selected()"> Link </br>
 		</div>
 
-		<div class="control-group">
-			<label class="control-label" for="fn">Voeg nieuwe file toe</label>
-			<div class="controls">
-				<input id="fn" type="text" ng-model="file.title"
-				placeholder="Titel" required="required"/>	 
-				<select ng-model="file.category">
-				   <option value="CSS">CSS</option>
-			       <option value="design">Design</option>
-				   <option value="html">HTML</option>
-				   <option value="javascript">Javascript</option>
-				   <option value="PHP">PHP</option>
-				</select>
-				<select ng-model="file.filetype">
-				   <option value="article">Article</option>
-			       <option value="codesnippet">Codesnippet</option>
-				   <option value="video">Video</option>
-				   <option value="link">Link</option>
-				</select>
-			</div>
-			<button type="submit" class="btn btn-primary" ng-click="opslaan()" ng-model-instant>
-				<a class="icon-plus"></a> Save
-			</button>
-		</div>
+		<a class="btn btn-success btn-md" ng-href="#/new-file">Add new file</a>
 	</div>
 
 	<div id="page-content-wrapper"  class="col-sm-9">
@@ -49,11 +27,12 @@
 		    </div>
 		</div>
 		<div class="row">
-		  <div ng-repeat="f in filtered = ( files | orderBy: sortColumn:reverseSort | filter: filterByCategory | filter: filterFile | filter: searchText ) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+		  <div ng-repeat="f in filtered = ( files | orderBy:f.uploaded | filter: filterByCategory | filter: filterFile | filter: searchText ) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
 		  <div class="clearfix" ng-if="$index % 3 == 0"></div>
 			<div class="item  col-xs-4 col-lg-4">
 	            <div class="thumbnail">
-	                <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />
+	            <a ng-href="#/file/{{f.id}}">
+	                <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" /></a>
 	                <div class="caption">
 	                    <h4 class="group inner list-group-item-heading">
 	                        {{ f.title }}</h4>

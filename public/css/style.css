@@ -7,12 +7,10 @@ table {
 }
 
 td {
-	border: 1px solid black;
 	padding: 5px;
 }
 
 th {
-	border: 1px solid black;
 	padding: 5px;
 	text-align: left;
 	cursor: pointer;
@@ -52,5 +50,17 @@ footer {
 
 .no-data {
 	display: inline;
+}
+
+.container {
+	max-width: 90%;
+}
+
+.filetype {
+	background-color: #CCFCCB;
+}
+
+.category {
+	background-color: #568259;
 }
 

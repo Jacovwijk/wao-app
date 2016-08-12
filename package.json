@@ -14,5 +14,9 @@
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "mysql": "^2.11.1"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.14.0",
+    "gulp": "^3.9.1"
   }
 }

@@ -20,19 +20,22 @@
 				}).when('/file/:id', {
 					templateUrl : 'views/file.html',
 					controller : 'myController'
+				}).when('/new-file', {
+					templateUrl : 'views/new-file.html',
+					controller : 'myController'
 				}).when('/404', {
 					templateUrl : 'views/404.html',
 					controller : 'myController'
+				}).otherwise({ 
+					redirectTo : '/404'
 				});
-				//otherwise({ redirectTo : '/404'});
 		}])
 
 		.controller("myController",  function($scope, $http, $log, $location, $routeParams, $timeout){
 
 				$scope.opslaan = function ()  {
 				    $http.post('/files', angular.toJson($scope.file)).success(function () {
-				    	$scope.load();
-				    	$scope.file = "";
+				    	$location.path('/');
 				    });
 				 };
 
@@ -123,6 +126,14 @@
 			    $scope.filter = {};
 
 			    $scope.getCategories = function () {
+			        return ($scope.files || []).map(function (w) {
+			            return w.category;
+			        }).filter(function (w, idx, arr) {
+			            return arr.indexOf(w) === idx;
+			        });
+			    };
+
+			     $scope.getCategories = function () {
 			        return ($scope.files || []).map(function (w) {
 			            return w.category;
 			        }).filter(function (w, idx, arr) {
