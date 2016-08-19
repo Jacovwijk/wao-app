@@ -21,6 +21,8 @@
 	</div>
 
 	<div id="page-content-wrapper"  class="col-sm-9">
+
+
 		<div ng-show="filtered.length">
 		    <div class="">
 		        <h5>Found {{ filtered.length }} of {{ totalItems}} total files</h5>
@@ -32,10 +34,11 @@
 			<div class="item  col-xs-4 col-lg-4">
 	            <div class="thumbnail">
 	            <a ng-href="#/file/{{f.id}}">
-	                <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" /></a>
+	                <img ng-show="f.image == 0" class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />
+	                <img ng-show="f.image != 0" ng-src="http://localhost:3000/uploads/{{f.image}}" alt="Description" /></a>
 	                <div class="caption">
 	                    <h4 class="group inner list-group-item-heading">
-	                        {{ f.title }}</h4>
+	                        {{ f.title }} {{f.votes}}</h4>
 	                    <p class="group inner list-group-item-text">
 	                        {{ f.filetype }}</p>
 	                    <div class="row">

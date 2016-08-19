@@ -12,6 +12,7 @@
 			<input id="fn" type="text" ng-model="file.title"
 			placeholder="Titel" required="required"/>	 
 			<select ng-model="file.category">
+			   <option value="" disabled>>- maak een keuze -<</option>
 			   <option value="CSS">CSS</option>
 		       <option value="Design">Design</option>
 			   <option value="HTML">HTML</option>
@@ -19,13 +20,14 @@
 			   <option value="PHP">PHP</option>
 			</select>
 			<select ng-model="file.filetype">
+			   <option value="" disabled>>- maak een keuze -<</option>
 			   <option value="Article">Article</option>
-		       <option value="Codesnippet">Codesnippet</option>
+		       <option value="Codesnippets">Codesnippets</option>
 			   <option value="Video">Video</option>
 			   <option value="Link">Link</option>
 			</select>
 		</div>
-
+		<input type = "file" file-model = "file.myfile" />
 		<button type="submit" class="btn btn-primary" ng-click="opslaan()" ng-model-instant>
 			<a class="icon-plus"></a> Save
 		</button>

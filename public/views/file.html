@@ -6,11 +6,14 @@
 </div>
 
 <div id="page-content-wrapper"  class="col-sm-9">
-	<h2>{{onefile.title}}</h2></br>
+	<h2>{{onefile.title}}<span><button class="btn btn-success" ng-click="waardeer(onefile.id)">Waardeer</button></span></h2></br>
 	<div><span >{{onefile.category}}</span>
 	<span >{{onefile.filetype}}</span></div></br>
+	<div>{{onefile.votes}}</div>
 	<button class="btn btn-primary" ng-click="pasaan()">Edit</button>
-	 <button class="btn btn-danger" ng-click="verwijderen(onefile.id)">Delete</button>
+	<button class="btn btn-danger" ng-click="verwijderen(onefile.id)">Delete</button>
+
+	 <div ng-show="showGreeting">You already voted</div>
 
 	<div ng-show="aan">
 	Wijzig data:
@@ -23,9 +26,9 @@
 		       <td>
 		       <select ng-model="onefile.category">
 			       <option value="CSS">CSS</option>
-			       <option value="design">Design</option>
-				   <option value="html">HTML</option>
-				   <option value="javascript">Javascript</option>
+			       <option value="Design">Design</option>
+				   <option value="HTML">HTML</option>
+				   <option value="Javascript">Javascript</option>
 				   <option value="PHP">PHP</option>
 			   </select>
 			   </td>
