@@ -9,8 +9,13 @@
 	<div class="control-group">
 		<label class="control-label" for="fn">Voeg nieuwe file toe</label>
 		<div class="controls">
+			<div>
+			Titel: 
 			<input id="fn" type="text" ng-model="file.title"
-			placeholder="Titel" required="required"/>	 
+			placeholder="Titel" required="required"/>	
+			</div>
+			<div> 
+			Category:
 			<select ng-model="file.category">
 			   <option value="" disabled>>- maak een keuze -<</option>
 			   <option value="CSS">CSS</option>
@@ -19,6 +24,9 @@
 			   <option value="Javascript">Javascript</option>
 			   <option value="PHP">PHP</option>
 			</select>
+			</div>
+			<div>
+			Filetype: 
 			<select ng-model="file.filetype">
 			   <option value="" disabled>>- maak een keuze -<</option>
 			   <option value="Article">Article</option>
@@ -26,11 +34,22 @@
 			   <option value="Video">Video</option>
 			   <option value="Link">Link</option>
 			</select>
+			</div>
+			<div>
+			Content:
+			<div text-angular ng-model="file.content"></div>
+			</div>
+			<div>
+				<span>Uitgelichte afbeelding: </span>
+				<input type = "file" file-model = "file.myfile" />
+			</div>
+			<div>
+				<button type="submit" class="btn btn-primary" ng-click="opslaan()" ng-model-instant>
+					<a class="icon-plus"></a> Save
+				</button>
+				<a class="btn btn-warning btn-md" ng-href="#/">Cancel
+				</a>
+			</div>
 		</div>
-		<input type = "file" file-model = "file.myfile" />
-		<button type="submit" class="btn btn-primary" ng-click="opslaan()" ng-model-instant>
-			<a class="icon-plus"></a> Save
-		</button>
-		<a class="btn btn-warning btn-md" ng-href="#/">Cancel</a>
 	</div>
 </div>

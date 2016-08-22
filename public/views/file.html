@@ -6,14 +6,12 @@
 </div>
 
 <div id="page-content-wrapper"  class="col-sm-9">
-	<h2>{{onefile.title}}<span><button class="btn btn-success" ng-click="waardeer(onefile.id)">Waardeer</button></span></h2></br>
+	<h2>{{onefile.title}}<span><button class="btn btn-success" ng-click="waardeer(onefile.id)">Waardeer</button></span></h2> <div ng-show="showGreeting">You already voted</div></br>
 	<div><span >{{onefile.category}}</span>
-	<span >{{onefile.filetype}}</span></div></br>
-	<div>{{onefile.votes}}</div>
+	<span >{{onefile.filetype}}</span><span>{{onefile.votes}}</span></div></br>
+	<div ta-bind ng-model="onefile.content">{{onefile.content}}</div>
 	<button class="btn btn-primary" ng-click="pasaan()">Edit</button>
 	<button class="btn btn-danger" ng-click="verwijderen(onefile.id)">Delete</button>
-
-	 <div ng-show="showGreeting">You already voted</div>
 
 	<div ng-show="aan">
 	Wijzig data:
@@ -33,12 +31,15 @@
 			   </select>
 			   </td>
 		       <td>{{onefile.filetype}}</td>
-		       <td>
-			       <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-			       <button class="btn btn-primary" ng-click="edit(onefile.id)">Save</button>
-		       </td>
 	    	</tr>
 	    </table>
+	    <div>
+	    Content:
+	    <div text-angular ng-model="onefile.content"></div>
+		</div>
+
+	    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+		<button class="btn btn-primary" ng-click="edit(onefile.id)">Save</button>
 
 	</div>
 	</br>

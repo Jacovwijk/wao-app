@@ -24,14 +24,20 @@
 
 
 		<div ng-show="filtered.length">
-		    <div class="">
+		    <div class="">		      
 		        <h5>Found {{ filtered.length }} of {{ totalItems}} total files</h5>
+		        <span class="orderfile">
+		        Order by: 
+		        <button ng-click='sortBy("-uploaded")'>Recent</button>
+		        <button ng-click='sortBy("-votes")'>Populair</button>
+		        </span>
 		    </div>
 		</div>
 		<div class="row">
-		  <div ng-repeat="f in filtered = ( files | orderBy:f.uploaded | filter: filterByCategory | filter: filterFile | filter: searchText ) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
-		  <div class="clearfix" ng-if="$index % 3 == 0"></div>
-			<div class="item  col-xs-4 col-lg-4">
+		  <div ng-repeat="f in filtered = ( files | orderBy: orderFiles | filter: filterByCategory | filter: filterFile | filter: searchText ) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+		  <div class="clearfix threecolumfix" ng-if="$index % 3 == 0"></div>
+		  <div class="clearfix twocolumfix" ng-if="$index % 2 == 0"></div>
+			<div class="item  col-xs-6 col-lg-4">
 	            <div class="thumbnail">
 	            <a ng-href="#/file/{{f.id}}">
 	                <img ng-show="f.image == 0" class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />

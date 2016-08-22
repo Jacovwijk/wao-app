@@ -1,5 +1,5 @@
 /// <reference path="angular.min.js" />
- angular.module("myApp", ['ngRoute', 'ngCookies', 'ui.bootstrap'])
+ angular.module("myApp", ['ngRoute', 'ngCookies', 'ui.bootstrap', 'textAngular'])
 
  		.directive('fileModel', function ($parse) {
             return {
@@ -86,6 +86,13 @@
 				};
 				$scope.load();
 
+				$scope.orderFiles = "-uploaded"
+
+				$scope.sortBy = function (orderValue) {
+					$scope.orderFiles = orderValue;
+					console.log($scope.orderFiles);
+				};
+
 				$scope.catSort = "";
 
 				$scope.filterFile = function (file) {
@@ -93,7 +100,7 @@
 				 		return '' == $scope.catSort ;
 				 	}
 				 	return file.filetype == $scope.catSort;
-			    }
+			    };
 
 			    $scope.filter = {};
 

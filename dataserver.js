@@ -30,8 +30,9 @@ app.post('/files', upload.any(), function (req, res) {
   console.log(req.body);
   var connection = getConnection();
   connection.connect();
-  var newFiles = {id: 0, title: req.body.title, category: req.body.category, filetype: req.body.filetype, image: req.files[0].filename};
+  var newFiles = {id: 0, title: req.body.title, content: req.body.content, category: req.body.category, filetype: req.body.filetype, image: req.files[0].filename};
   var query = connection.query('INSERT INTO dataluik SET ?', newFiles, function (err, result) {
+    
     res.send(JSON.stringify(result.insertId));
     res.status(200).end();
   });
@@ -73,8 +74,8 @@ app.put('/file/:id', function (req, res) {
   var idf = req.params.id;
   var connection = getConnection();
   connection.connect();
-  var editFile = {id: idf, title: req.body.title, category: req.body.category};
-  var query = connection.query('UPDATE dataluik SET title = ?, category =? WHERE id = ?', [editFile.title, editFile.category, editFile.id] , function (err, result) {
+  var editFile = {id: idf, title: req.body.title, category: req.body.category, content: req.body.content};
+  var query = connection.query('UPDATE dataluik SET title = ?, category =?, content =? WHERE id = ?', [editFile.title, editFile.category, editFile.content, editFile.id] , function (err, result) {
     res.status(200).end();
   });
   connection.end();
